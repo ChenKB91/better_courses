@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+import json
 # regex
 import re
 
@@ -33,14 +34,21 @@ for row in rows[1:]:
         tmp.append('[沒有老師]')
     # 時間 地點
     match = re.findall(r"([一二三四五六][0-9,ABCD]*)\(([^\(\)]*)\)",columns[11].text)
+    # print(match)
+    timetable = []
     for m in match:
-        s = m.group(1)
+        s = m[0]
         day = zh2num[s[0]]
         period = [class2num[x] for x in s[1:].split(',')]
-        # TODO: organize timetable
+        for p in period:
+            timetable.append(7*day+p)
+
+    tmp.append(timetable)
 
     print(tmp)
     courses.append(tmp)
 
 # print(courses)
 print(len(courses))
+with open('general.json', 'w') as f:
+    f.write(json.dumps(courses))

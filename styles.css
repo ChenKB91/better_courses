@@ -29,17 +29,18 @@ td.time{
     line-height: 90%;
 }
 .leftpanel{
-    /* width: 50%; */
-    flex-grow: 3;
+    width: 50%;
+    /* flex-grow: 3; */
     height: 100%;
     margin:10px;
     /* float: left; */
 }
 .rightpanel {
-    flex-grow: 2;
+    /* flex-grow: 2; */
     border-radius: 10px;
     background-color: #555;
     padding: 10px 20px;
+    width: 50%;
     height: 100%;
     margin:10px;
 

@@ -2,12 +2,15 @@
   <head>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="read_courses.js"></script>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
   </head>
   <body>
-    <header class="w3-container w3-indigo">
-        <h2>NTU Course choosing</h1>
+    <header class="w3-bar w3-indigo">
+        <a href="/" class="w3-bar-item w3-button w3-xlarge">NTU Course choosing</a>
+        <div class="w3-bar-item w3-right w3-xlarge">Author: CKB</div>
     </header>
     <div class="container">
         <table class="leftPanel">
@@ -82,9 +85,9 @@
         <div class="rightPanel">
             <h3>尋找課程</h3>
             <div class="Container">
-                <div class="leftPanel2 w3-container">
+                <form class="leftPanel2 w3-container">
                     <label>輸入:</label>
-                    <input type="text" id="queryStr" class="w3-input">
+                    <input type="text" id="queryStr" name="queryStr" class="w3-input">
                     <p>搜尋條件</p>
                     <p>
                         <input class="w3-radio" type="radio" name="searchType" value="courseName" checked>
@@ -103,22 +106,31 @@
                         <label>課程編號</label>
                     </p>
                     <p>
-                        <input type="checkbox" id="useTimetable" class="w3-check">
+                        <input type="checkbox" id="useTimetable" name="useTimetable" class="w3-check">
                         <label>過濾時間衝突課程</label>
                     </p>
                     <p class="w3-cell-bottom">
-                        <button id="search" class="w3-button w3-hover-white w3-blue">搜尋</button>
+                        <button id="search" class="w3-button w3-hover-white w3-blue" type="button" onclick="get_stuff();">搜尋</button>
                     </p>
-                </div>
+                </form>
 
-                <div class="rightPanel2" style="overflow-y: scroll;">
+                <div class="rightPanel2 w3-padding" style="overflow-y: scroll;">
                     Available Courses<br>
                     <ul id="courses_list" class="w3-card w3-ul w3-white" style="margin-top: 10px;">
                         <li class="w3-bar">
-                            <div class="w3-bar-item">test 1</div>
-                            <span class="w3-bar-item w3-button w3-right" onclick="alert(1);">&plus;</span>
+                            <div class="w3-bar-item">
+                                <span class="w3-large">普通貓貓學</span><br>
+                                <span>喵喵喵</span>
+                            </div>
+                            <span class="w3-bar-item w3-button w3-right w3-xlarge" onclick="alert(1);">&plus;</span>
                         </li>
-                        
+                        <li class="w3-bar">
+                            <div class="w3-bar-item">
+                                <span class="w3-large">森林多樣性概論豪華加強版</span><br>
+                                <span>喵喵</span>
+                            </div>
+                            <span class="w3-bar-item w3-button w3-right w3-xlarge" onclick="alert(1);">&plus;</span>
+                        </li>
                     </ul>
                 </div>
             </div>

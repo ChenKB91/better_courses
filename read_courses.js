@@ -8,5 +8,5 @@ function objectifyForm(formArray) {
 }
 function get_stuff(){
     var options = objectifyForm($('form').serializeArray())
-    console.log(options)
+    // console.log(options)
 }

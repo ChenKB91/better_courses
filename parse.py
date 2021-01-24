@@ -15,23 +15,23 @@ courses = []
 for row in rows[1:]:
     columns = row.find_all('td')
     # print(columns)
-    tmp = []
+    tmp = {}
     # 流水號
-    tmp.append(columns[0].text)
+    tmp["waterNum"] = columns[0].text
     # 課程編號
-    tmp.append(columns[2].text)
+    tmp["courseID"] = columns[2].text
     # 課程名稱
     try:
-        tmp.append(columns[4].a.text)
+        tmp["courseName"]=columns[4].a.text
     except AttributeError:
-        tmp.append('[沒有名稱]')
+        tmp["courseName"] = '[沒有名稱]'
     # 學分數
-    tmp.append(columns[6].text)
+    tmp["credit"] = columns[6].text
     # 教師
     try:
-        tmp.append(columns[9].a.text)
+        tmp["teacher"] = columns[9].a.text
     except AttributeError:
-        tmp.append('[沒有老師]')
+        tmp["teacher"] = '無名氏'
     # 時間 地點
     match = re.findall(r"([一二三四五六][0-9,ABCD]*)\(([^\(\)]*)\)",columns[11].text)
     # print(match)
@@ -43,9 +43,9 @@ for row in rows[1:]:
         for p in period:
             timetable.append(7*day+p)
 
-    tmp.append(timetable)
+    tmp["timetable"] = timetable
 
-    print(tmp)
+    # print(tmp)
     courses.append(tmp)
 
 # print(courses)

@@ -33,22 +33,33 @@ for row in rows[1:]:
     except AttributeError:
         tmp["teacher"] = '無名氏'
     # 時間 地點
-    match = re.findall(r"([一二三四五六][0-9,ABCD]*)\(([^\(\)]*)\)",columns[11].text)
+    match = re.findall(r"([一二三四五六日][0-9,ABCD]*)\(([^\(\)]*)\)",columns[11].text)
     # print(match)
     timetable = []
     for m in match:
         s = m[0]
         day = zh2num[s[0]]
+        tmp["location"] = s[1]
         period = [class2num[x] for x in s[1:].split(',')]
         for p in period:
-            timetable.append(7*day+p)
+            timetable.append(15*day+p)
 
     tmp["timetable"] = timetable
-
-    # print(tmp)
+    # 限制條件
+    tmp["condition"] = columns[13].text
+    # 備註
+    tmp["description"] = columns[14].text
+    # 通識類別
+    
+    match = re.search("A([1-8]*)\\*?:", columns[14].text)
+    if match is not None:
+        tmp["category"] = [int(c) for c in match.group(1)]
+    else:
+        tmp["category"] = []
+    print(tmp)
     courses.append(tmp)
 
 # print(courses)
 print(len(courses))
-with open('general.json', 'w') as f:
-    f.write(json.dumps(courses))
+# with open('general.json', 'w') as f:
+#     f.write(json.dumps(courses))

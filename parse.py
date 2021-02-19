@@ -36,10 +36,11 @@ for row in rows[1:]:
     match = re.findall(r"([一二三四五六日][0-9,ABCD]*)\(([^\(\)]*)\)",columns[11].text)
     # print(match)
     timetable = []
+    
     for m in match:
         s = m[0]
         day = zh2num[s[0]]
-        tmp["location"] = s[1]
+        tmp["location"] = m[1]
         period = [class2num[x] for x in s[1:].split(',')]
         for p in period:
             timetable.append(15*day+p)
@@ -61,5 +62,7 @@ for row in rows[1:]:
 
 # print(courses)
 print(len(courses))
-# with open('general.json', 'w') as f:
-#     f.write(json.dumps(courses))
+# for c in courses:
+#     print(f"{c['courseName']},  {c['location']}")
+with open('general.json', 'w') as f:
+    f.write(json.dumps(courses))

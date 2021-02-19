@@ -51,3 +51,7 @@ td.time{
 .rightpanel2{
     flex-grow: 2;
 }
+.infoContent{
+    line-height: 200%;
+    margin: 10px;
+}

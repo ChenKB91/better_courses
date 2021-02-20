@@ -4,6 +4,7 @@ $(document).ready(function(){
     popup = document.getElementById('infoPopup');
     popupInfo = document.getElementById('infoContent');
     document.getElementById('closeInfo').onclick = function(){popup.style.display="none"}
+    document.addEventListener("keyup", function(event){if(event.keyCode === 13){get_stuff();}})
 })
 
 function objectifyForm(formArray) {
@@ -83,8 +84,8 @@ function showInfo(index){
 }
 function showHowto(){
     $("#infoCourseName").html('教學');
-    s = '• 按 <font style="color:cyan">&#9432;</font> 顯示課程資訊<br>'+
-    '• 按 <font style="color:cyan">&plus;</font> 加入課程(Not implemented)<br>'+
+    s = '• 按 <font style="color:blue">&#9432;</font> 顯示課程資訊<br>'+
+    '• 按 <font style="color:blue">&plus;</font> 加入課程(Not implemented)<br>'+
     '• 點選左側時間表設定不可用之時段(Not implemented)<br>'+
     '• 這裡現在只能找通識而已Q_Q 不過我有點懶得寫完XD'
 

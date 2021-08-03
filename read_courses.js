@@ -1,8 +1,23 @@
 var data;
+var forbiddenSession = new Array(105).fill(0);
 $(document).ready(function(){
     $.getJSON("general.json",function(json){data=json;})
-})
 
+    $(".leftPanel td").click(function(event){
+        console.log(event.target.id);
+        toggleSession(event.target.id.substring(1));
+    })
+
+})
+function toggleSession(session){
+    if(forbiddenSession[session] == 0){
+        $("#C"+session).css('background','red');
+        forbiddenSession[session] = 1;
+    }else{
+        $("#C"+session).css('background','');
+        forbiddenSession[session] = 0;
+    }
+}
 function objectifyForm(formArray) {
     //serialize data function
     var returnArray = {};
@@ -20,12 +35,23 @@ function get_stuff(){
     for(var i=0; i<data.length; i++){
         var course = data[i];
         var queryFlag = true;
+        // Search with text and type
         if(options['queryStr'] !== ''){
             if(course[options['searchType']].includes(options['queryStr'])){
                 queryFlag = true;
                 console.log(course[options['searchType']]);
             }else queryFlag = false;
         }
+        // Filter forbidden sessions
+        if(queryFlag){
+            course.timetable.forEach(function(t,i){
+                if(forbiddenSession[t] === 1){
+                    queryFlag = false;
+                }
+            })
+        }
+
+
         if(queryFlag) result.push(i); // TODO: Add timetable filter
     }
     // console.log(result);

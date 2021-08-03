@@ -1,2 +1,4 @@
 .DS_Store
+dept_html/*
 *.pyc
+*.code-workspace

@@ -1,11 +1,6 @@
-import requests
-from tqdm import tqdm
-
-def crawl(url, para, filename):
-    r = requests.get(url, params=para)
-    r.encoding = 'big5'
-    with open(filename, 'w', encoding='UTF-8') as f:
-        f.write(r.text)
+from bs4 import BeautifulSoup
+import json
+import re
 
 # Department code from the searching website. Theres a lot of 'em
 departments = [
@@ -27,30 +22,80 @@ departments = [
     "B430", "B440", "B450", "B460", "B470", "B471", "B472", "B473", "B474", "B480", "B490", "G010", "H000", "H010", "H020", "H410", "H420", "H430", "H440",
     "J000", "J100", "J110", "K000", "K010", "K020", "K030", "Q010", "Q020", "V410", "Z010"]
 
-# 通識
-para_general = {
-    'current_sem': '110-1',
-    'classarea': 'a',
-    'coursename': '',
-    'teachername': '',
-    'alltime': 'yes',
-    'allproced': 'yes',
-    'page_cnt': '300'
-}
+zh2num = {'日':0,'一':1,'二':2,'三':3,'四':4,'五':5,'六':6}
+class2num = {'0':0,'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'A':11,'B':12,'C':13,'D':14}
 
-crawl("https://nol.ntu.edu.tw/nol/coursesearch/search_for_03_co.php",
-      para_general, "general.html")
+main_dict = {}
 
-para_dpt = {
-    'current_sem': '110-1',
-    'yearcode': '0',    # 不限年級分類
-    'selcode': '-1',    # 不限必修/選修
-    'alltime': 'yes',   # 不限星期
-    'allproced': 'yes', # 不限節次
-    'allsel': 'yes',    # 不限加選方式
-    'page_cnt': '1000'  # Because why not
-}
-for i in tqdm(range(len(departments))):
-    para_dpt['dptname'] = departments[i]
-    crawl("https://nol.ntu.edu.tw/nol/coursesearch/search_for_02_dpt.php",
-          para_dpt, f"dept_html/{departments[i]}.html")
+for dpt in departments:
+
+    soup = BeautifulSoup(open(f"dept_html/{dpt}.html", encoding="UTF-8"),features="html.parser")
+    table = soup.find_all('table')
+    for i in range(len(table)):
+        if "筆課程：" in table[i].text:
+            count_index = i
+            # print(f"amount in {i}")
+        if "流水號" in table[i].text:
+            course_table_index = i
+            # print(f"course in {i}")
+    course_count = int(table[count_index].find_all('font')[0].text)
+    course_table = table[course_table_index]
+    # print(table)
+    rows = course_table.find_all('tr')
+    # col = rows[1].find_all('td')
+    # for i in range(len(col)):
+    #     print(f'{i} {col[i].text}')
+
+    courses = []
+    for row in rows[1:]:
+        columns = row.find_all('td')
+        # print(columns)
+        tmp = {}
+        # 種類
+        tmp["type"] = columns[9].text
+        # 流水號
+        tmp["waterNum"] = columns[0].text
+        # 課程編號
+        tmp["courseID"] = columns[2].text
+        # 課程名稱
+        try:
+            tmp["courseName"]=columns[4].a.text
+        except AttributeError:
+            tmp["courseName"] = '[沒有名稱]'
+        # 學分數
+        tmp["credit"] = columns[6].text
+        # 教師
+        try:
+            tmp["teacher"] = columns[10].a.text
+        except AttributeError:
+            tmp["teacher"] = '不知教師'
+        # 時間 地點
+        match = re.findall(r"([一二三四五六日][0-9,ABCD]*)\(([^\(\)]*)\)",columns[12].text)
+        # print(match)
+        timetable = []
+        for m in match:
+            s = m[0]
+            day = zh2num[s[0]]
+            tmp["location"] = s[1]
+            period = [class2num[x] for x in s[1:].split(',')]
+            for p in period:
+                timetable.append(15*day+p)
+
+        tmp["timetable"] = timetable
+        # 限制條件
+        tmp["condition"] = columns[14].text
+        # 備註
+        tmp["description"] = columns[14].text
+        
+        # print(tmp)
+        courses.append(tmp)
+
+    # print(courses)
+    if len(courses) != course_count:
+        print(f"found {len(courses)} courses in department {dpt}, actual = {course_count}")
+    else: print(f"{dpt} is fine, {course_count}")
+
+    main_dict[dpt] = courses
+
+with open('department.json', 'w') as f:
+    f.write(json.dumps(courses))

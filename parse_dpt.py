@@ -98,4 +98,4 @@ for dpt in departments:
     main_dict[dpt] = courses
 
 with open('department.json', 'w') as f:
-    f.write(json.dumps(courses))
+    f.write(json.dumps(main_dict))

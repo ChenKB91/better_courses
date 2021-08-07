@@ -1,6 +1,6 @@
 <html>
   <head>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" type="text/css" href="styles.css?v=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="read_courses.js"></script>
@@ -28,7 +28,7 @@
         <table class="leftPanel">
             <thead>
                 <tr>
-                    <th>&nbsp;</th><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th>
+                    <th>&nbsp;</th><th id="D0">日</th><th id="D1">一</th><th id="D2">二</th><th id="D3">三</th><th id="D4">四</th><th id="D5">五</th><th id="D6">六</th>
                 </tr>
             </thead>
             <tbody>
@@ -100,25 +100,38 @@
                 <form class="leftPanel2 w3-container">
                     <label>輸入:</label>
                     <input type="text" id="queryStr" name="queryStr" class="w3-input">
-                    <p>搜尋條件</p>
                     <p>
-                        <input class="w3-radio" type="radio" name="searchType" value="courseName" checked>
-                        <label>課程名稱</label>    
+                        搜尋條件 <br>
+                        <div class="w3-container w3-cell">
+                            <input class="w3-radio" type="radio" name="searchType" value="courseName" checked>
+                            <label>課程名稱</label>    
+                            <br>
+                            <input class="w3-radio" type="radio" name="searchType" value="teacher">
+                            <label>教師</label>
+                        </div>
+                        <div class="w3-container w3-cell">
+                            <input class="w3-radio" type="radio" name="searchType" value="waterNum">
+                            <label>流水號</label>
+                            <br>
+                            <input class="w3-radio" type="radio" name="searchType" value="courseID">
+                            <label>課程編號</label>
+                        </div>
                     </p>
                     <p>
-                        <input class="w3-radio" type="radio" name="searchType" value="teacher">
-                        <label>教師</label>
+                        通識類別 <br>
+                        <div class="w3-container">
+                            <input type="checkbox" name="gA1" class="w3-check w3-blue" checked><label>A1</label>
+                            <input type="checkbox" name="gA2" class="w3-check" checked><label>A2</label>
+                            <input type="checkbox" name="gA3" class="w3-check" checked><label>A3</label>
+                            <input type="checkbox" name="gA4" class="w3-check" checked><label>A4</label> <br>
+                            <input type="checkbox" name="gA5" class="w3-check" checked><label>A5</label>
+                            <input type="checkbox" name="gA6" class="w3-check" checked><label>A6</label>
+                            <input type="checkbox" name="gA7" class="w3-check" checked><label>A7</label>
+                            <input type="checkbox" name="gA8" class="w3-check" checked><label>A8</label>
+                        </div>
                     </p>
                     <p>
-                        <input class="w3-radio" type="radio" name="searchType" value="waterNum">
-                        <label>流水號</label>
-                    </p>
-                    <p>
-                        <input class="w3-radio" type="radio" name="searchType" value="courseID">
-                        <label>課程編號</label>
-                    </p>
-                    <p>
-                        <input type="checkbox" id="useTimetable" name="useTimetable" class="w3-check">
+                        <input type="checkbox" name="noConflicting" class="w3-check">
                         <label>過濾時間衝突課程</label>
                     </p>
                     <p class="w3-cell-bottom">

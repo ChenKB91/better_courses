@@ -9,6 +9,8 @@ body{
     height: 90%;
 }
 table {
+    table-layout: fixed;
+    text-align: center;
     border-collapse: collapse;
     background-color: white;
 }
@@ -19,14 +21,17 @@ thead, td.time{
     background-color: rgb(159, 185, 255);
     color: black;
 }
+
 td.time{
-    text-align: center;
     line-height: 150%;
     width:10%;
 }
 .timetext{
     font-size: smaller;
     line-height: 90%;
+}
+label{
+    margin: 5px;
 }
 .leftpanel{
     width: 50%;
@@ -46,10 +51,10 @@ td.time{
 
 }
 .leftpanel2{
-    flex-grow: 1
+    flex-grow: 2;
 }
 .rightpanel2{
-    flex-grow: 2;
+    flex-grow: 3;
 }
 .infoContent{
     line-height: 200%;

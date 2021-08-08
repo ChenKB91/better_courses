@@ -40,7 +40,7 @@ function toggleDay(day) {
 }
 function toggleSession(session) {
     if (forbiddenSession[session] == 0) {
-        $("#C" + session).css('background', 'red');
+        $("#C" + session).css('background', 'var(--nord11)');
         forbiddenSession[session] = 1;
     } else {
         $("#C" + session).css('background', '');
@@ -221,11 +221,12 @@ function showInfo(course) {
 }
 function showHowto() {
     $("#infoCourseName").html('教學');
-    s = '• 按 <font style="color:blue">&#9432;</font> 顯示課程資訊<br>' +
-        '• 按 <font style="color:blue">&plus;</font> 加入課程<br>' +
-        '• 按 <font style="color:blue">&times;</font> 移除課程<br>' +
-        '• 點選左側時間表設定不可用時段，在右方句選「過濾紅底時段課程」可以過濾課程<br>' +
-        '• 這裡現在只能找通識、系所課程而已QAQ'
+    s = '• 按 <font class="textHL">&#9432;</font> 顯示課程資訊<br>' +
+        '• 按 <font class="textHL">&plus;</font> 加入課程<br>' +
+        '• 按 <font class="textHL">&times;</font> 移除課程<br>' +
+        '• 點擊左側時間表設定不可用時段，點擊最上方星期幾一次設定整天<br>' +
+        '• 這裡現在只能找通識、系所課程而已QAQ<br>'
+        '• 歡迎任何想改進此工具的人士fork丟PR'
 
     $('#infoContent').html(s);
     popup.style.display = 'block';

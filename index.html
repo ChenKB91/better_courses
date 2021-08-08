@@ -9,17 +9,17 @@
   </head>
   <body>
     <!-- 最上面那條東西 -->
-    <header class="w3-bar w3-xlarge">
-        <a href="https://chenkb91.github.io/better_courses" class="w3-bar-item w3-button" style="background-color: #81a1c1;">NTU Course choosing</a>
-        <a class="w3-bar-item w3-button" onclick="showHowto()">❓</a>
-        <a href="https://github.com/chenkb91" class="w3-bar-item w3-right w3-button">Github</a>
+    <header class="w3-bar w3-large bar">
+        <a href="https://chenkb91.github.io/better_courses" class="w3-bar-item w3-button bar1">NTU Course choosing</a>
+        <a class="w3-bar-item w3-button bar2" onclick="showHowto()">說明</a>
+        <a href="https://github.com/ChenKB91/better_courses/tree/gh-pages" class="w3-bar-item w3-button">Github</a>
     </header>
     <!-- 課程資訊 -->
     <div id="infoPopup" class="w3-modal w3-large">
-        <div class="w3-modal-content">
-            <div class="w3-bar w3-blue">
+        <div class="w3-modal-content infoContainer">
+            <div class="w3-bar infoBar">
                 <div id="infoCourseName" class="w3-bar-item"></div>
-                <a id="closeInfo" class="w3-bar-item w3-button w3-right">&times;</a>
+                <a id="closeInfo" class="w3-bar-item w3-button w3-right clzBtn">&times;</a>
             </div>
             <div id="infoContent" class="infoContent"></div>
         </div>
@@ -458,14 +458,14 @@
                         <label>過濾紅底時段課程</label>
                     </p>
                     <p class="w3-cell-bottom">
-                        <button id="search" class="w3-button w3-hover-white w3-blue" type="button" onclick="get_stuff();">搜尋</button>
-                        <button id="search" class="w3-button w3-hover-white w3-blue" type="button" onclick="alert('QAQ not implemented');">顯示已加入課程</button>
+                        <button id="search" class="w3-button w3-hover-white" type="button" onclick="get_stuff();">搜尋</button>
+                        <button id="search" class="w3-button w3-hover-white" type="button" onclick="alert('QAQ not implemented');">顯示已加入課程</button>
                     </p>
                 </form>
 
                 <div class="rightPanel2 w3-padding" style="overflow-y: scroll;">
                     Available Courses<br>
-                    <ul id="courses_list" class="w3-card w3-ul w3-white" style="margin-top: 10px;">
+                    <ul id="courses_list" class="w3-card w3-ul" style="margin-top: 10px;">
                         <li class="w3-bar">
                             <div class="w3-bar-item">
                                 <span class="w3-large">普通貓貓學</span><br>

@@ -2,25 +2,37 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
     background-color: var(--nord0);
-    color: var(--nord6);
+    color: var(--nord4);
 }
 .container{
     display: flex;
     justify-content: space-between;
     height: 90%;
 }
+.bar{
+    background-color: var(--nord1);
+}
+.bar1 {
+    background-color: var(--nord8) !important;
+}
+.bar2 {
+    background-color: var(--nord7) !important;
+}
+.bar1, .bar2{
+    color: var(--nord0) !important;
+}
 table {
     table-layout: fixed;
     text-align: center;
     border-collapse: collapse;
-    background-color: white;
+    background-color: var(--nord0);
 }
 td, th {
-    border:solid black 1px;
+    border:solid var(--nord1) 1px;
 }
 thead, td.time{
-    background-color: rgb(159, 185, 255);
-    color: black;
+    background-color: var(--nord2);
+    color: var(--nord6)
 }
 
 td.time{
@@ -49,7 +61,17 @@ label{
     width: 50%;
     height: 100%;
     margin:10px;
-
+}
+input, select{
+    background-color: var(--nord2);
+    color: var(--nord4)
+}
+#search{
+    background-color: var(--nord8);
+    color: var(--nord0);
+}
+#courses_list{
+    background-color: var(--nord3);
 }
 .leftpanel2{
     width: 40%;
@@ -57,8 +79,19 @@ label{
 .rightpanel2{
     width: 60%;
 }
+.infoBar{
+    background-color: var(--nord10);
+}
+.clzBtn{
+    background-color: var(--nord11) !important;
+}
+.infoContainer{
+    background-color: var(--nord1) !important;
+}
 .infoContent{
     line-height: 200%;
     margin: 10px;
-    color: black;
+}
+.textHL, .btAdd, .btInf{
+    color: var(--nord8) !important;
 }

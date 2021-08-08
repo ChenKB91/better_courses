@@ -4,8 +4,8 @@ var courseInTable = new Array(105).fill(0);
 var addedCourse = {};
 $(document).ready(function () {
     // Read json and initialize variable
-    $.getJSON("general.json", function (json) { dataGeneral = json; })
-    $.getJSON("department.json", function (json) { dataDpt = json; })
+    $.getJSON("data/general.json", function (json) { dataGeneral = json; })
+    $.getJSON("data/department.json", function (json) { dataDpt = json; })
 
     popup = document.getElementById('infoPopup');
     popupInfo = document.getElementById('infoContent');
@@ -156,6 +156,7 @@ function addToTable(course) {
             conflict.push(addedCourse[courseInTable[t]])
         }
     })
+    // TODO: clean up this place
     if(flag){
         if(confirm('此課程與以下課程衝突，選擇加入會刪除這些課程：\n'+s+'確認加入？')){
             conflict.forEach(function(c,i){removeFromTable(c)})
@@ -221,49 +222,11 @@ function showInfo(course) {
 function showHowto() {
     $("#infoCourseName").html('教學');
     s = '• 按 <font style="color:blue">&#9432;</font> 顯示課程資訊<br>' +
-        '• 按 <font style="color:blue">&plus;</font> 加入課程(Not implemented)<br>' +
-        '• 點選左側時間表設定不可用之時段(Not implemented)<br>' +
-        '• 這裡現在只能找通識而已Q_Q 不過我有點懶得寫完XD'
+        '• 按 <font style="color:blue">&plus;</font> 加入課程<br>' +
+        '• 按 <font style="color:blue">&times;</font> 移除課程<br>' +
+        '• 點選左側時間表設定不可用時段，在右方句選「過濾紅底時段課程」可以過濾課程<br>' +
+        '• 這裡現在只能找通識、系所課程而已QAQ'
 
     $('#infoContent').html(s);
     popup.style.display = 'block';
-}
-
-// For trolling lol
-function get_stuff_troll() {
-    var options = objectifyForm($('form').serializeArray())
-    console.log(options)
-
-    // Filter courses
-    var result = [];
-    for (var i = 0; i < data.length; i++) {
-        var course = data[i];
-        var queryFlag = true;
-        if (options['queryStr'] !== '') {
-            if (course[options['searchType']].includes(options['queryStr'])) {
-                queryFlag = true;
-                console.log(course[options['searchType']]);
-            } else queryFlag = false;
-        }
-        if (queryFlag) result.push(i); // TODO: Add timetable filter
-    }
-    // console.log(result);
-
-    result.forEach(i => console.log(i))
-    result.forEach(i => console.log(data[i]))
-    $("ul").text('');
-    result.forEach(i => addToList_troll(i))
-
-}
-function addToList_troll(index) {
-    var course = data[index];
-    var courseStr = '<li class="w3-bar">' +
-        '<div class="w3-bar-item">' +
-        `<span class="w3-large">${course['courseName']}</span><br>` +
-        `<span>${[course['teacher'], verbalTime(index)].join('．')}</span>` +
-        '</div>' +
-        '<span class="w3-bar-item w3-button w3-right w3-xlarge" onclick="alert(\'Not implemented yet QAQ\\nPlease just click the info button\');">&plus;</span>' +
-        `<span class="w3-bar-item w3-button w3-right w3-xlarge" onclick="window.location.href=\'https://www.youtube.com/watch?v=072tU1tamd0\';">&#9432;</span>`
-    '</li>';
-    $("ul").append(courseStr);
 }

@@ -51,10 +51,10 @@ label{
 
 }
 .leftpanel2{
-    flex-grow: 2;
+    width: 40%;
 }
 .rightpanel2{
-    flex-grow: 3;
+    width: 60%;
 }
 .infoContent{
     line-height: 200%;

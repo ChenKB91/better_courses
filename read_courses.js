@@ -5,6 +5,7 @@ var addedCourse = {};
 $(document).ready(function () {
     // Read json and initialize variable
     $.getJSON("general.json", function (json) { dataGeneral = json; })
+    $.getJSON("department.json", function (json) { dataDpt = json; })
 
     popup = document.getElementById('infoPopup');
     popupInfo = document.getElementById('infoContent');
@@ -61,47 +62,58 @@ function get_stuff() {
 
     // Clear list
     $("ul").text('');
-    addMatchCourses(dataGeneral, options)
+    addMatchCourses(options)
 
 }
 
-function addMatchCourses(data, options) {
+function addMatchCourses(options) {
     // Filter courses according to inputs, sadly I have no idea how to do this properly
-    for (var i = 0; i < data.length; i++) {
-        var course = data[i];
-        var queryFlag = true;
-        // Search with text and type
-        if (options.queryStr !== '') {
-            if (course[options.searchType].includes(options.queryStr)) {
-                queryFlag = true;
-                console.log(course[options.searchType]);
-            } else queryFlag = false;
-        }
-        if (!queryFlag) { continue; }
-        // filter 通識 category
-        if(course.type == "通識"){
+    
+    // General courses
+    dataGeneral.forEach(function(course){
+        if(filterTimeName(course, options)){
             var f = false;
-            course.category.forEach(function(c,i){
-                if(options['gA'+c]){f=true}
+            course.category.forEach(function(c){
+                if(options['gA'+c]) f = true;
             })
-            if(!f){queryFlag = false}
+            if(f) addToList(course);
         }
-        if (!queryFlag) { continue; }
-        // Filter forbidden sessions
+    })
+
+    // Department courses
+    if(options.dpt === "all"){
+        for(dpt in dataDpt){
+            dataDpt[dpt].forEach(function(course){
+                if(filterTimeName(course, options)) addToList(course);
+            })
+        }
+    }else if(options.dpt !== ""){
+        dataDpt[options.dpt].forEach(function(course){
+            if(filterTimeName(course, options)) addToList(course);
+        })
+    }
+    
+}
+
+function filterTimeName(course, options){
+    var flag = true;
+    // Search with text and type
+    if (options.queryStr !== '') {
+        if (course[options.searchType].includes(options.queryStr)) {
+            flag = true;
+            console.log(course[options.searchType]);
+        } else flag = false;
+    }
+    if(flag){
         if (options.noConflicting) {
             course.timetable.forEach(function (t, i) {
                 if (forbiddenSession[t] === 1) {
-                    queryFlag = false;
+                    flag = false;
                 }
             })
         }
-        
-        // Filter 
-
-        if (queryFlag) {
-            addToList(course);
-        }
-    } 
+    }
+    return flag;
 }
 
 function addToList(course) {

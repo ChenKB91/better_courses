@@ -12,7 +12,8 @@
     <header class="w3-bar w3-large bar">
         <a href="https://chenkb91.github.io/better_courses" class="w3-bar-item w3-button bar1">NTU Course choosing</a>
         <a class="w3-bar-item w3-button bar2" onclick="showHowto()">說明</a>
-        <a href="https://github.com/ChenKB91/better_courses/tree/gh-pages" class="w3-bar-item w3-button">Github</a>
+        <a href="https://github.com/ChenKB91/better_courses/" class="w3-bar-item w3-button bar2">Github</a>
+        <a href="https://github.com/ChenKB91/" class="w3-bar-item w3-button w3-right">By CKB</a>
     </header>
     <!-- 課程資訊 -->
     <div id="infoPopup" class="w3-modal w3-large">
@@ -98,8 +99,10 @@
             <h3>尋找課程</h3>
             <div class="Container">
                 <form class="leftPanel2 w3-container">
-                    <label>輸入:</label>
+                    <label>關鍵詞: (可用「,」分隔多個詞)</label>
                     <input type="text" id="queryStr" name="queryStr" class="w3-input">
+                    <label>排除關鍵詞:</label>
+                    <input type="text" id="excludeStr" name="excludeStr" class="w3-input">
                     <p>
                         搜尋條件 <br>
                         <div class="w3-container w3-cell">
@@ -118,10 +121,10 @@
                         </div>
                     </p>
                     <p>
-                        選擇系所 <!--很長-->
+                        系所 <!--很長-->
                         <select class="w3-select" name="dpt">
 <option value="" selected>無</option>
-<option value="all" >全部系所</option>
+<option value="all" >全部系所 (課程多可能會有點慢)</option>
 <option value="0020">0020 體育室</option>
 <option value="0030">0030 軍訓室</option>
 <option value="0040">0040 外語教學暨資源中心</option>
@@ -458,13 +461,13 @@
                         <label>過濾紅底時段課程</label>
                     </p>
                     <p class="w3-cell-bottom">
-                        <button id="search" class="w3-button w3-hover-white" type="button" onclick="get_stuff();">搜尋</button>
-                        <button id="search" class="w3-button w3-hover-white" type="button" onclick="alert('QAQ not implemented');">顯示已加入課程</button>
+                        <button id="search" class="w3-button w3-hover-white" type="button" onclick="addMatchCourses();">搜尋</button>
+                        <button id="search" class="w3-button w3-hover-white" type="button" onclick="addAddedCourses();">顯示已加入課程</button>
                     </p>
                 </form>
 
                 <div class="rightPanel2 w3-padding" style="overflow-y: scroll;">
-                    Available Courses<br>
+                    搜尋結果<br>
                     <ul id="courses_list" class="w3-card w3-ul" style="margin-top: 10px;">
                         <li class="w3-bar">
                             <div class="w3-bar-item">

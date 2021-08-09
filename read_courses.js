@@ -10,7 +10,7 @@ $(document).ready(function () {
     popup = document.getElementById('infoPopup');
     popupInfo = document.getElementById('infoContent');
     document.getElementById('closeInfo').onclick = function () { popup.style.display = "none" }
-    document.addEventListener("keyup", function (event) { if (event.keyCode === 13) { get_stuff(); } })
+    document.addEventListener("keyup", function (event) { if (event.keyCode === 13) { addMatchCourses(); } })
 
     $(".leftPanel td").click(function (event) {
         console.log(event.target.id);
@@ -55,20 +55,18 @@ function objectifyForm(formArray) {
     }
     return returnArray;
 }
-function get_stuff() {
-
-    var options = objectifyForm($('form').serializeArray())
-    // console.log(options)
-
-    // Clear list
+function addAddedCourses() {
+    // Clear the list
     $("ul").text('');
-    addMatchCourses(options)
-
+    for(c in addedCourse){
+        addToList(addedCourse[c]);
+    }
 }
+function addMatchCourses() {
+    var options = objectifyForm($('form').serializeArray())
+    // Clear the list
+    $("ul").text('');
 
-function addMatchCourses(options) {
-    // Filter courses according to inputs, sadly I have no idea how to do this properly
-    
     // General courses
     dataGeneral.forEach(function(course){
         if(filterTimeName(course, options)){
@@ -97,13 +95,23 @@ function addMatchCourses(options) {
 
 function filterTimeName(course, options){
     var flag = true;
-    // Search with text and type
+    // Search with keyword and type
     if (options.queryStr !== '') {
-        if (course[options.searchType].includes(options.queryStr)) {
-            flag = true;
-            console.log(course[options.searchType]);
-        } else flag = false;
+        flag = false
+        queryArr = options.queryStr.split(',');
+        queryArr.forEach(function(s){
+            if (course[options.searchType].includes(s)) flag = true;
+        })
     }
+    // Filter out excluded keywords
+    if (options.excludeStr !== '') {
+        queryArr = options.queryStr.split(',');
+        queryArr.forEach(function(s){
+            if (course[options.searchType].includes(s)) flag = false;
+        })
+    }
+    
+    // Filter red periods
     if(flag){
         if (options.noConflicting) {
             course.timetable.forEach(function (t, i) {
@@ -117,11 +125,14 @@ function filterTimeName(course, options){
 }
 
 function addToList(course) {
+    // Add a course to the list at the right
     console.log(addedCourse[course.waterNum])
-    // So sad that we have to do this
+    
     // Since JS converts object to string and directly put it in the HTML, we can't just use onclick and tuck it in
     // So we have to prepare the HTML and add the click function with JQuery instead
-    var listItem = $('<li class="w3-bar"><div class="w3-bar-item"><span class="w3-large">' + course.courseName + '</span><br><span class="inf"></span></div><span class="w3-bar-item w3-button w3-right w3-xlarge btAdd">&plus;</span><span class="w3-bar-item w3-button w3-right w3-xlarge btInf">&#9432;</span></li>');
+    var listItem = $('<li class="w3-bar"><div class="w3-bar-item"><span class="w3-large">' + course.courseName +
+     '</span><br><span class="inf"></span></div><span class="w3-bar-item w3-button w3-right w3-xlarge btAdd">&plus;</span>'+
+     '<span class="w3-bar-item w3-button w3-right w3-xlarge btInf">&#9432;</span></li>');
 
     listItem.find('span.inf').text([course['teacher'], verbalTime(course)].join('．'))
     if (addedCourse[course.waterNum]) {
@@ -167,7 +178,7 @@ function addToTable(course) {
             })
             addedCourse[course.waterNum] = course;
         }
-        get_stuff() // refresh the course list to correct the button
+        addMatchCourses() // refresh the course list to correct the button
     }else{
         course.timetable.forEach(function (t, i) {
             $('#C' + t).text(course.courseName);
@@ -221,12 +232,11 @@ function showInfo(course) {
 }
 function showHowto() {
     $("#infoCourseName").html('教學');
-    s = '• 按 <font class="textHL">&#9432;</font> 顯示課程資訊<br>' +
-        '• 按 <font class="textHL">&plus;</font> 加入課程<br>' +
-        '• 按 <font class="textHL">&times;</font> 移除課程<br>' +
-        '• 點擊左側時間表設定不可用時段，點擊最上方星期幾一次設定整天<br>' +
-        '• 這裡現在只能找通識、系所課程而已QAQ<br>'
-        '• 歡迎任何想改進此工具的人士fork丟PR'
+    s = '• 按 <font class="textHL">&#9432;</font> 顯示課程資訊，按 <font class="textHL">&plus;</font> 加入課程，'+
+        '按 <font class="textHL">&times;</font> 移除課程<br>' +
+        '• 點擊左側時間表設定不可用時段，點擊最上方星期欄可一次設定整天<br>' +
+        '• 這裡目前只能找通識、系所課程而已QAQ<br>'+
+        '• 歡迎任何有意改進此工具的人士fork丟PR (ˊ•ω•ˋ)'
 
     $('#infoContent').html(s);
     popup.style.display = 'block';

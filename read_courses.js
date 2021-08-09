@@ -87,6 +87,7 @@ function addMatchCourses() {
         }
     }else if(options.dpt !== ""){
         dataDpt[options.dpt].forEach(function(course){
+            course['dept'] = options.dpt;
             if(filterTimeName(course, options)) addToList(course);
         })
     }
@@ -105,7 +106,7 @@ function filterTimeName(course, options){
     }
     // Filter out excluded keywords
     if (options.excludeStr !== '') {
-        queryArr = options.queryStr.split(',');
+        queryArr = options.excludeStr.split(',');
         queryArr.forEach(function(s){
             if (course[options.searchType].includes(s)) flag = false;
         })
@@ -223,8 +224,8 @@ function showInfo(course) {
         `教師: ${course['teacher']}<br>` +
         `上課時間: ${verbalTime(course)}<br>` +
         `選課限制: ${course['condition']}<br>` +
-        `備註: ${course['description']}<br>` +
-        `適用通識: A${course['category']}`
+        `備註: ${course['description']}<br>`
+    if (course['category']) s = s+`適用通識: A${course['category']}`
     $('#infoContent').html(s);
 
     //show box

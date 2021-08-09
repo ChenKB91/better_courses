@@ -65,5 +65,5 @@ for row in rows[1:]:
 print(len(courses))
 # for c in courses:
 #     print(f"{c['courseName']},  {c['location']}")
-with open('general.json', 'w') as f:
+with open('data/general.json', 'w') as f:
     f.write(json.dumps(courses))

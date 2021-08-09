@@ -1,12 +1,7 @@
-from bs4 import BeautifulSoup
 
-soup = BeautifulSoup(open(f"dept_html/1000.html", encoding="UTF-8"),features="html.parser")
-table = soup.find_all('table')
-for i in range(len(table)):
-    print(i)
-    print(table[i])
-course_count = int(soup.find_all('table')[6].find_all('font')[0].text)
-print(course_count)
+with open("aaa.txt", 'w') as f:
+    f.write('wwwwww')
+
 
 # per = '0123456789XABCD'
 # time = ['7:10-8:00',

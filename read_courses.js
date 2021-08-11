@@ -23,7 +23,34 @@ $(document).ready(function () {
     })
 
 })
+function showHowto() {
+    $("#infoCourseName").html('教學');
+    s = '• 按 <font class="textHL">&#9432;</font> 顯示課程資訊，按 <font class="textHL">&plus;</font> 加入課程，'+
+        '按 <font class="textHL">&times;</font> 移除課程<br>' +
+        '• 點擊左側時間表設定不可用時段，點擊最上方星期欄可一次設定整天<br>' +
+        '• 這裡目前只能找通識、系所課程而已QAQ<br>'+
+        '• 歡迎任何有意改進此工具的人士fork丟PR (ˊ•ω•ˋ)'
 
+    $('#infoContent').html(s);
+    popup.style.display = 'block';
+}
+function showInfo(course) {
+    //change content
+    $("#infoCourseName").html(course['courseName']);
+    s = `流水號: ${course['waterNum']}<br>` +
+        `課程編號: ${course['courseID']}<br>` +
+        `學分數: ${course['credit']}<br>` +
+        `教師: ${course['teacher']}<br>` +
+        `上課時間: ${verbalTime(course)}<br>` +
+        `上課地點: ${course['location']}<br>` +
+        `選課限制: ${course['condition']}<br>` +
+        `備註: ${course['description']}<br>`
+    if (course['category']) s = s+`適用通識: A${course['category']}`
+    $('#infoContent').html(s);
+
+    //show box
+    popup.style.display = 'block';
+}
 function toggleDay(day) {
     var flag = 1;
     for (var i = 0; i < 15; i++) {
@@ -215,30 +242,4 @@ function verbalTime(course) {
     })
     return result;
 }
-function showInfo(course) {
-    //change content
-    $("#infoCourseName").html(course['courseName']);
-    s = `流水號: ${course['waterNum']}<br>` +
-        `課程編號: ${course['courseID']}<br>` +
-        `學分數: ${course['credit']}<br>` +
-        `教師: ${course['teacher']}<br>` +
-        `上課時間: ${verbalTime(course)}<br>` +
-        `選課限制: ${course['condition']}<br>` +
-        `備註: ${course['description']}<br>`
-    if (course['category']) s = s+`適用通識: A${course['category']}`
-    $('#infoContent').html(s);
 
-    //show box
-    popup.style.display = 'block';
-}
-function showHowto() {
-    $("#infoCourseName").html('教學');
-    s = '• 按 <font class="textHL">&#9432;</font> 顯示課程資訊，按 <font class="textHL">&plus;</font> 加入課程，'+
-        '按 <font class="textHL">&times;</font> 移除課程<br>' +
-        '• 點擊左側時間表設定不可用時段，點擊最上方星期欄可一次設定整天<br>' +
-        '• 這裡目前只能找通識、系所課程而已QAQ<br>'+
-        '• 歡迎任何有意改進此工具的人士fork丟PR (ˊ•ω•ˋ)'
-
-    $('#infoContent').html(s);
-    popup.style.display = 'block';
-}

@@ -6,7 +6,7 @@ import re
 zh2num = {'日':0,'一':1,'二':2,'三':3,'四':4,'五':5,'六':6}
 class2num = {'0':0,'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'A':11,'B':12,'C':13,'D':14}
 
-soup = BeautifulSoup(open("general.html", encoding="UTF-8"),features="html.parser")
+soup = BeautifulSoup(open("misc_html/general.html", encoding="UTF-8"),features="html.parser")
 table = soup.find_all('table')[7]
 # print(table)
 rows = table.find_all('tr')

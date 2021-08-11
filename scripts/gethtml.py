@@ -39,7 +39,26 @@ para_general = {
 }
 
 crawl("https://nol.ntu.edu.tw/nol/coursesearch/search_for_03_co.php",
-      para_general, "general.html")
+      para_general, "misc_html/general.html")
+
+# PE course: for some reason, NTU decides to not let us specify how many courses to include in one page,
+# therefore I have no idea what to do now. Maybe you can figure it out lol
+
+# option = [1,2,4,5,6]
+# para_pe = {
+# 	"op": "S",
+# 	"current_sem": "110-1",
+# 	"cou_cname": "",
+# 	"tea_cname": "",
+# 	"year_code": "1",
+# 	"alltime": "yes",
+# 	"allproced": "yes",
+# 	"Submit": "%ACd%B8%DF"
+# }
+# for x in option:
+#     para_pe["year_code"] = x
+#     crawl("https://nol.ntu.edu.tw/nol/coursesearch/search_for_09_gym.php",
+#         para_pe, f"misc_html/pe{x}.html")
 
 para_dpt = {
     'current_sem': '110-1',

@@ -34,6 +34,7 @@ for row in rows[1:]:
     except AttributeError:
         tmp["teacher"] = '無名氏'
     # 時間 地點
+    # regex match for something like 一12三34(博雅101)
     match = re.findall(r"([一二三四五六日][0-9,ABCD]*)\(([^\(\)]*)\)",columns[11].text)
     # print(match)
     timetable = []
@@ -61,9 +62,6 @@ for row in rows[1:]:
     print(tmp)
     courses.append(tmp)
 
-# print(courses)
-print(len(courses))
-# for c in courses:
-#     print(f"{c['courseName']},  {c['location']}")
+print("=> Writing general courses to json...")
 with open('data/general.json', 'w') as f:
     f.write(json.dumps(courses))

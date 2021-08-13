@@ -104,7 +104,7 @@
                     <label>排除關鍵詞:</label>
                     <input type="text" id="excludeStr" name="excludeStr" class="w3-input">
                     <p>
-                        搜尋條件 <br>
+                        搜尋條件
                         <div class="w3-container w3-cell">
                             <input class="w3-radio" type="radio" name="searchType" value="courseName" checked>
                             <label>課程名稱</label>    
@@ -121,7 +121,20 @@
                         </div>
                     </p>
                     <p>
-                        系所 <!--很長-->
+                        通識類別
+                        <div class="w3-container">
+                            <input type="checkbox" name="gA1" class="w3-check"><label>A1</label>
+                            <input type="checkbox" name="gA2" class="w3-check"><label>A2</label>
+                            <input type="checkbox" name="gA3" class="w3-check"><label>A3</label>
+                            <input type="checkbox" name="gA4" class="w3-check"><label>A4</label> <br>
+                            <input type="checkbox" name="gA5" class="w3-check"><label>A5</label>
+                            <input type="checkbox" name="gA6" class="w3-check"><label>A6</label>
+                            <input type="checkbox" name="gA7" class="w3-check"><label>A7</label>
+                            <input type="checkbox" name="gA8" class="w3-check"><label>A8</label>
+                        </div>
+                    </p>
+                    <p>
+                        系所課程 <!--很長-->
                         <select class="w3-select" name="dpt">
 <option value="" selected>無</option>
 <option value="all" >全部系所 (課程多可能會有點慢)</option>
@@ -444,17 +457,28 @@
                         </select>
                     </p>
                     <p>
-                        通識類別 <br>
-                        <div class="w3-container">
-                            <input type="checkbox" name="gA1" class="w3-check" checked><label>A1</label>
-                            <input type="checkbox" name="gA2" class="w3-check" checked><label>A2</label>
-                            <input type="checkbox" name="gA3" class="w3-check" checked><label>A3</label>
-                            <input type="checkbox" name="gA4" class="w3-check" checked><label>A4</label> <br>
-                            <input type="checkbox" name="gA5" class="w3-check" checked><label>A5</label>
-                            <input type="checkbox" name="gA6" class="w3-check" checked><label>A6</label>
-                            <input type="checkbox" name="gA7" class="w3-check" checked><label>A7</label>
-                            <input type="checkbox" name="gA8" class="w3-check" checked><label>A8</label>
-                        </div>
+                        體育課程
+                        <select class="w3-select" name="pe">
+                            <option value="" selected>無</option>
+                            <option value="all">全部</option>
+                            <option value="1">健康體適能</option>
+                            <option value="2">專項運動學群</option>
+                            <option value="4">選修體育</option>
+                            <option value="5">校隊班</option>
+                            <option value="6">進修學士班</option>
+                        </select>
+                    </p>
+                    <p>
+                        共同課程
+                        <select class="w3-select" name="common">
+                            <option value="" selected>無</option>
+                            <option value="all">全部</option>
+                            <option value="1">國文領域 </option>
+                            <option value="2">外文領域 </option>
+                            <option value="3">英文領域 </option>
+                            <option value="7">可充當外文領域 </option>
+                            <option value="8">共同選修課程 </option>
+                        </select>
                     </p>
                     <p>
                         <input type="checkbox" name="noConflicting" class="w3-check">

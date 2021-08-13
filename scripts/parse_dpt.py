@@ -52,7 +52,7 @@ for dpt in departments:
         # print(columns)
         tmp = {}
         # 種類
-        tmp["type"] = columns[9].text
+        tmp["type"] = columns[1].text+columns[9].text
         # 流水號
         tmp["waterNum"] = columns[0].text
         # 課程編號
@@ -92,11 +92,10 @@ for dpt in departments:
         courses.append(tmp)
 
     # print(courses)
-    if len(courses) != course_count:
-        print(f"found {len(courses)} courses in department {dpt}, actual = {course_count}")
-    else: print(f"{dpt} is fine, {course_count}")
+    print(f"Parsed Department {dpt}, {course_count} courses")
 
     main_dict[dpt] = courses
 
+print("=> Writing department courses to json...")
 with open('data/department.json', 'w') as f:
     f.write(json.dumps(main_dict))

@@ -38,27 +38,10 @@ para_general = {
     'page_cnt': '300'
 }
 
+print("=> Fetching general courses from website...")
 crawl("https://nol.ntu.edu.tw/nol/coursesearch/search_for_03_co.php",
       para_general, "misc_html/general.html")
 
-# PE course: for some reason, NTU decides to not let us specify how many courses to include in one page,
-# therefore I have no idea what to do now. Maybe you can figure it out lol
-
-# option = [1,2,4,5,6]
-# para_pe = {
-# 	"op": "S",
-# 	"current_sem": "110-1",
-# 	"cou_cname": "",
-# 	"tea_cname": "",
-# 	"year_code": "1",
-# 	"alltime": "yes",
-# 	"allproced": "yes",
-# 	"Submit": "%ACd%B8%DF"
-# }
-# for x in option:
-#     para_pe["year_code"] = x
-#     crawl("https://nol.ntu.edu.tw/nol/coursesearch/search_for_09_gym.php",
-#         para_pe, f"misc_html/pe{x}.html")
 
 para_dpt = {
     'current_sem': '110-1',
@@ -69,7 +52,9 @@ para_dpt = {
     'allsel': 'yes',    # 不限加選方式
     'page_cnt': '1000'  # Because why not
 }
-for i in tqdm(range(len(departments))):
+
+print("=> Fetching department courses from website...")
+for i in tqdm(range(len(departments)), unit="department"):
     para_dpt['dptname'] = departments[i]
     crawl("https://nol.ntu.edu.tw/nol/coursesearch/search_for_02_dpt.php",
           para_dpt, f"dept_html/{departments[i]}.html")

@@ -113,12 +113,13 @@ function addMatchCourses() { // Add all courses matching the condition to the li
     if(options.dpt === "all"){
         for(dpt in dataDpt){
             dataDpt[dpt].forEach(function(course){
+                course['dpt'] = options.dpt;
                 if(filterTimeName(course, options)) addToList(course);
             })
         }
     }else if(options.dpt !== ""){
         dataDpt[options.dpt].forEach(function(course){
-            course['dept'] = options.dpt;
+            course['dpt'] = options.dpt;
             if(filterTimeName(course, options)) addToList(course);
         })
     }
@@ -126,6 +127,7 @@ function addMatchCourses() { // Add all courses matching the condition to the li
     if(options.pe === "all"){
         for(cat in dataPe){
             dataPe[cat].forEach(function(course){
+                course['dpt'] = 'T010';
                 if(filterTimeName(course, options)) addToList(course);
             })
         }

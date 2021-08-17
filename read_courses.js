@@ -31,7 +31,8 @@ function showHowto() {
         '按 <font class="textHL">&times;</font> 移除課程<br>' +
         '• 點擊左側時間表設定不可用時段，點擊最上方星期欄可一次設定整天<br>' +
         '• 這裡目前只能找通識、系所、體育、共同課程而已QAQ<br>' +
-        '• 歡迎任何有意改進此工具的人士fork丟PR (ˊ•ω•ˋ)'
+        '• 歡迎任何有意改進此工具的人士fork丟PR，如果喜歡這個小工具的話，也請不吝給我個星星 (ˊ•ω•ˋ)' +
+        
 
     $('#infoContent').html(s);
     popup.style.display = 'block';

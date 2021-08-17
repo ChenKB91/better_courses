@@ -1,5 +1,5 @@
 # better_courses
-![image](https://github.com/ChenKB91/better_courses/blob/main/cat.jpg)
+<img src="https://github.com/ChenKB91/better_courses/blob/main/cat.jpg" width=500>
 
 相信各位台大人都有過被課程網糟糕的搜尋系統搞到快瘋掉的經驗，例如篩選特定節次功能結果得到一堆不能上的課程、共同課程的「所有領域」不會搜尋全部領域等，我也是不堪其擾。為了解決這個問題，便趁暑假製作了這個小工具幫助尋找課程。
 本工具具有相對較直覺的搜尋選項，對於選課這件事情可能比較實用，網頁上方有基礎的使用教學。

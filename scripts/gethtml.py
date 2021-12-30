@@ -7,6 +7,9 @@ def crawl(url, para, filename):
     with open(filename, 'w', encoding='UTF-8') as f:
         f.write(r.text)
 
+#### CHANGE HERE ####
+cur_sem = '110-2'
+
 # Department code from the searching website. Theres a lot of 'em
 departments = [
     "0030", "0040", "0050", "1000", "1010", "1011", "1020", "1030", "1040", "1050", "1060", "1070", "1080", "1090", "1210", "1220", "1230", "1240", "1250",
@@ -29,7 +32,7 @@ departments = [
 
 # 通識
 para_general = {
-    'current_sem': '110-1',
+    'current_sem': cur_sem,
     'classarea': 'a',
     'coursename': '',
     'teachername': '',
@@ -44,7 +47,7 @@ crawl("https://nol.ntu.edu.tw/nol/coursesearch/search_for_03_co.php",
 
 
 para_dpt = {
-    'current_sem': '110-1',
+    'current_sem': cur_sem,
     'yearcode': '0',    # 不限年級分類
     'selcode': '-1',    # 不限必修/選修
     'alltime': 'yes',   # 不限星期

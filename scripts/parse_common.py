@@ -9,7 +9,7 @@ option = [1,2,3,7,8]
 optext = {1:"國文",2:"外文",3:"英文",7:"可充當外文",8:"共同選修"}
 # option = [1]
 para_pe = {
-	"current_sem": "110-1",
+	"current_sem": "110-2",
 	"dptname": "0",
 	"couarea": "1",
 	"alltime": "yes",

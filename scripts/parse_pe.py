@@ -9,7 +9,7 @@ option = [1,2,4,5,6]
 # option = [1]
 para_pe = {
 	"op": "S",
-	"current_sem": "110-1",
+	"current_sem": "110-2",
 	"cou_cname": "",
 	"tea_cname": "",
 	"year_code": "1",

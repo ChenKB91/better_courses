@@ -1,14 +1,19 @@
 import requests
+import os
 from tqdm import tqdm
+
 
 def crawl(url, para, filename):
     r = requests.get(url, params=para)
-    r.encoding = 'big5'
+    # r.encoding = 'big5'
     with open(filename, 'w', encoding='UTF-8') as f:
         f.write(r.text)
 
 #### CHANGE HERE ####
-cur_sem = '110-2'
+import configparser
+config = configparser.ConfigParser()
+config.read('config.ini')
+cur_sem = config['DEFAULT']['current_sem']
 
 # Department code from the searching website. Theres a lot of 'em
 departments = [
@@ -38,8 +43,14 @@ para_general = {
     'teachername': '',
     'alltime': 'yes',
     'allproced': 'yes',
-    'page_cnt': '300'
+    'page_cnt': '500'
 }
+
+# if folder "misc_html" and "dept_html" doesn't exist, create them
+if not os.path.exists('misc_html'):
+    os.makedirs('misc_html')
+if not os.path.exists('dept_html'):
+    os.makedirs('dept_html')
 
 print("=> Fetching general courses from website...")
 crawl("https://nol.ntu.edu.tw/nol/coursesearch/search_for_03_co.php",

@@ -2,6 +2,10 @@ from bs4 import BeautifulSoup
 import json
 import re
 import requests
+import configparser
+config = configparser.ConfigParser()
+config.read('config.ini')
+
 zh2num = {'日':0,'一':1,'二':2,'三':3,'四':4,'五':5,'六':6}
 class2num = {'0':0,'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'A':11,'B':12,'C':13,'D':14}
 
@@ -9,7 +13,7 @@ option = [1,2,4,5,6]
 # option = [1]
 para_pe = {
 	"op": "S",
-	"current_sem": "110-2",
+	"current_sem": config['DEFAULT']['current_sem'],
 	"cou_cname": "",
 	"tea_cname": "",
 	"year_code": "1",
@@ -28,7 +32,7 @@ for gym_op in option:
     while(start < course_count):
         para_pe['startrec'] = f"{start}"
         r = requests.get("https://nol.ntu.edu.tw/nol/coursesearch/search_for_09_gym.php", params=para_pe)
-        r.encoding = 'big5'
+
         start += 15
         soup = BeautifulSoup(r.text,features="html.parser")
         table = soup.find_all('table')

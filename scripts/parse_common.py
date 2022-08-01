@@ -2,14 +2,17 @@ from bs4 import BeautifulSoup
 import json
 import re
 import requests
+import configparser
 zh2num = {'日':0,'一':1,'二':2,'三':3,'四':4,'五':5,'六':6}
 class2num = {'0':0,'1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9,'10':10,'A':11,'B':12,'C':13,'D':14}
 
 option = [1,2,3,7,8]
 optext = {1:"國文",2:"外文",3:"英文",7:"可充當外文",8:"共同選修"}
-# option = [1]
+
+config = configparser.ConfigParser()
+config.read('config.ini')
 para_pe = {
-	"current_sem": "110-2",
+	"current_sem": config['DEFAULT']['current_sem'],
 	"dptname": "0",
 	"couarea": "1",
 	"alltime": "yes",
@@ -25,7 +28,6 @@ for op in option:
     courses = []
 
     r = requests.get("https://nol.ntu.edu.tw/nol/coursesearch/search_for_01_major.php", params=para_pe)
-    r.encoding = 'big5'
     
     soup = BeautifulSoup(r.text,features="html.parser")
     table = soup.find_all('table')

@@ -69,6 +69,7 @@ input, select{
 button#search{
     background-color: var(--nord8);
     color: var(--nord0);
+    margin: 3px;
 }
 button#ntu{
     background-color: var(--nord13);
@@ -94,6 +95,7 @@ div#buttonDiv{
     background-color: var(--nord10);
 }
 .clzBtn{
+    font-size: large;
     background-color: var(--nord11) !important;
 }
 .infoContainer{

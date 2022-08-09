@@ -1,24 +1,34 @@
+<!-- 
+   ___      __  __            _____                        
+  / _ )___ / /_/ /____ ____  / ___/__  __ _________ ___ ___
+ / _  / -_) __/ __/ -_) __/ / /__/ _ \/ // / __(_-</ -_|_-<
+/____/\__/\__/\__/\__/_/    \___/\___/\_,_/_/ /___/\__/___/
+                                                           
+Author: CKB, NTU CSIE. 
+Probably uses a lot of unnecessary bandwidth since I didn't minimize it, but it's host on github so I don't quite care lol.
+If you're looking at this, you're probably a developer! Feel free to fork and contribute!
+-->
+
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="styles.css?v=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="read_courses.js"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y072K5YWXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-Y072K5YWXX');
+    </script>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="utf-8" http-equiv="encoding">
     <title>NTU Better Courses</title>
   </head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y072K5YWXX"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-Y072K5YWXX');
-    </script>
   <body>
-    <!-- Author: CKB, NTU CSIE. Probably uses quite a lot of bandwidth, but the it's host by github so I don't quite care -->
     <header class="w3-bar w3-large bar">
         <a href="https://chenkb91.github.io/better_courses" class="w3-bar-item w3-button bar1">NTU Better Courses</a>
         <a class="w3-bar-item w3-button bar2" onclick="showHowto()">說明</a>
@@ -496,7 +506,10 @@
                     </p>
                     <p class="w3-cell-bottom">
                         <button id="search" class="w3-button w3-hover-white" type="button" onclick="addMatchCourses();">搜尋</button>
-                        <button id="search" class="w3-button w3-hover-white" type="button" onclick="addAddedCourses();">顯示已加入課程</button>
+                        <button id="search" class="w3-button w3-hover-white" type="button" onclick="addAddedCourses();">顯示已加入課程</button> 
+                        <br>
+                        <button id="search" class="w3-button w3-hover-white" type="button" onclick="exportJSON();">匯出課表</button>
+                        <button id="search" class="w3-button w3-hover-white" type="button" onclick="importJSON();">匯入課表</button>
                     </p>
                 </form>
 
@@ -512,10 +525,9 @@
                         </li>
                         <li class="w3-bar">
                             <div class="w3-bar-item">
-                                <span class="w3-large">森林多樣性概論豪華加強版</span><br>
-                                <span>喵喵</span>
+                                <span class="w3-large">人文與貓咪的交響：新趨勢與新素養（一）</span><br>
+                                <span>喵喵喵</span>
                             </div>
-                           
                         </li>
                     </ul>
                 </div>

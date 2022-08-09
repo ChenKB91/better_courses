@@ -94,21 +94,22 @@ function objectifyForm(formArray) {
     }
     return returnArray;
 }
-function addAddedCourses() { // Add courses that the user selected
+function addAddedCourses() { // display courses that the user selected to the right panel
     // Clear the list
     $("ul").text('');
     for (c in addedCourse) {
         addToList(addedCourse[c]);
     }
 }
-function addMatchCourses() { // Add all courses matching the condition to the list
+function addMatchCourses() { 
+    // Add all courses matching the current settings to the list
     var options = objectifyForm($('form').serializeArray())
     // Clear the list
     $("ul").text('');
 
     // General courses
     dataGeneral.forEach(function (course) {
-        if (filterTimeName(course, options)) {
+        if (filter(course, options)) {
             var f = false;
             course.category.forEach(function (c) {
                 if (options['gA' + c]) f = true;
@@ -122,43 +123,43 @@ function addMatchCourses() { // Add all courses matching the condition to the li
         for (dpt in dataDpt) {
             dataDpt[dpt].forEach(function (course) {
                 course['dpt'] = options.dpt;
-                if (filterTimeName(course, options)) addToList(course);
+                if (filter(course, options)) addToList(course);
             })
         }
     } else if (options.dpt !== "") {
         dataDpt[options.dpt].forEach(function (course) {
             course['dpt'] = options.dpt;
-            if (filterTimeName(course, options)) addToList(course);
+            if (filter(course, options)) addToList(course);
         })
     }
     // PE courses
     if (options.pe === "all") {
         for (cat in dataPe) {
             dataPe[cat].forEach(function (course) {
-                if (filterTimeName(course, options)) addToList(course);
+                if (filter(course, options)) addToList(course);
             })
         }
     } else if (options.pe !== "") {
         dataPe[options.pe].forEach(function (course) {
-            if (filterTimeName(course, options)) addToList(course);
+            if (filter(course, options)) addToList(course);
         })
     }
     // Common courses
     if (options.common === "all") {
         for (cat in dataCommon) {
             dataCommon[cat].forEach(function (course) {
-                if (filterTimeName(course, options)) addToList(course);
+                if (filter(course, options)) addToList(course);
             })
         }
     } else if (options.common !== "") {
         dataCommon[options.common].forEach(function (course) {
-            if (filterTimeName(course, options)) addToList(course);
+            if (filter(course, options)) addToList(course);
         })
     }
 
 }
 
-function filterTimeName(course, options) {
+function filter(course, options) {
     var flag = true;
     // Search with keyword and type
     if (options.queryStr !== '') {
@@ -295,4 +296,31 @@ function addToNTUCourse(course) {
 function openNTUCourseInfo(course) {
     window.open('https://nol.ntu.edu.tw/nol/coursesearch/print_table.php?course_id='+course.courseID2+'&class='+course.class+
     '&dpt_code='+course.dpt+'&ser_no='+course.waterNum+'&semester=111-1&lang=CH')
+}
+
+function exportJSON() {
+    var json = JSON.stringify(addedCourse);
+    function download(content, fileName, contentType) {
+        var a = document.createElement("a");
+        var file = new Blob([content], {type: contentType});
+        a.href = URL.createObjectURL(file);
+        a.download = fileName;
+        a.click();
+    }
+    download(json, 'MyCourses.json', 'text/plain');
+}
+
+function importJSON() {
+    let json = prompt("請輸入JSON格式的課程資料：", "");
+    if (json) {
+        // remove all the courses in the table
+        for(c in addedCourse) {
+            removeFromTable(addedCourse[c])
+        }
+        // Parse the json, and readd the courses
+        addedCourse = JSON.parse(json);
+        for(c in addedCourse) {
+            addToTable(addedCourse[c])
+        }
+    }
 }

@@ -50,11 +50,16 @@ function showInfo(course) {
         `選課限制: ${course.condition}<br>` +
         `備註: ${course.description}<br>`
     if (course['category']) s = s + `適用通識: A${course.category}`
+    s = s + `<div id="buttonDiv"></div>`
     $('#infoContent').html(s);
 
     var btn = $('<button id="ntu" type="button" class="w3-button w3-hover-white">加入台大課程網預選</button>')
     btn.click(function(){addToNTUCourse(course)});
-    $('#infoContent').append(btn)
+    $('#buttonDiv').append(btn);
+
+    var btn = $('<button id="ntu" type="button" class="w3-button w3-hover-white">更多課程資訊</button>')
+    btn.click(function(){openNTUCourseInfo(course)});
+    $('#buttonDiv').append(btn);
     //show box
     popup.style.display = 'block';
 }
@@ -130,13 +135,11 @@ function addMatchCourses() { // Add all courses matching the condition to the li
     if (options.pe === "all") {
         for (cat in dataPe) {
             dataPe[cat].forEach(function (course) {
-                course['dpt'] = 'T010';
                 if (filterTimeName(course, options)) addToList(course);
             })
         }
     } else if (options.pe !== "") {
         dataPe[options.pe].forEach(function (course) {
-            course['dpt'] = 'T010';
             if (filterTimeName(course, options)) addToList(course);
         })
     }
@@ -287,4 +290,9 @@ function addToNTUCourse(course) {
         did = '0000'
     }
     window.open('https://nol.ntu.edu.tw/nol/coursesearch/myschedule.php?add=' + cid + '&ddd=' + did)
+}
+
+function openNTUCourseInfo(course) {
+    window.open('https://nol.ntu.edu.tw/nol/coursesearch/print_table.php?course_id='+course.courseID2+'&class='+course.class+
+    '&dpt_code='+course.dpt+'&ser_no='+course.waterNum+'&semester=111-1&lang=CH')
 }

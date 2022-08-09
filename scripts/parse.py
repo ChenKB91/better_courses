@@ -21,13 +21,26 @@ for row in rows[1:]:
     tmp["waterNum"] = columns[0].text
     # 課程編號
     tmp["courseID"] = columns[2].text
+    # 班次
+    # check if all characters are digits
+    if columns[3].text == "\xa0":
+        tmp["class"] = ""
+    else:
+        tmp["class"] = columns[3].text
+        
     # 課程名稱
     try:
         tmp["courseName"]=columns[4].a.text
+        link = columns[4].a['href']
+        # get the argument "dpt_code=" from the link
+        dpt_code = re.findall(r'dpt_code=([\w]+)', link)[0]
+        tmp["dpt"] = dpt_code
     except AttributeError:
         tmp["courseName"] = '[沒有名稱]'
     # 學分數
     tmp["credit"] = columns[6].text
+    # 課程識別碼
+    tmp["courseID2"] = columns[7].text
     # 教師
     try:
         tmp["teacher"] = columns[9].a.text

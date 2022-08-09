@@ -5,7 +5,7 @@ from tqdm import tqdm
 
 def crawl(url, para, filename):
     r = requests.get(url, params=para)
-    # r.encoding = 'big5'
+    # r.encoding = 'big5' # changed in 111-1
     with open(filename, 'w', encoding='UTF-8') as f:
         f.write(r.text)
 

@@ -73,9 +73,13 @@ button#search{
 button#ntu{
     background-color: var(--nord13);
     color: var(--nord0);
+    text-align: center;
+    margin: 10px;
+    display: inline-block;
+}
+div#buttonDiv{
     margin-left: auto;
     margin-right: auto;
-    display: block;
 }
 #courses_list{
     background-color: var(--nord3);

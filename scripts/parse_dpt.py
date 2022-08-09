@@ -57,6 +57,11 @@ for dpt in departments:
         tmp["waterNum"] = columns[0].text
         # 課程編號
         tmp["courseID"] = columns[2].text
+        # 班次
+        if columns[3].text == "\xa0":
+            tmp["class"] = ""
+        else:
+            tmp["class"] = columns[3].text
         # 課程名稱
         try:
             tmp["courseName"]=columns[4].a.text
@@ -64,11 +69,13 @@ for dpt in departments:
             tmp["courseName"] = '[沒有名稱]'
         # 學分數
         tmp["credit"] = columns[6].text
+        # 課程識別碼
+        tmp["courseID2"] = columns[7].text
         # 教師
         try:
             tmp["teacher"] = columns[10].a.text
         except AttributeError:
-            tmp["teacher"] = '不知教師'
+            tmp["teacher"] = '不明教師'
         # 時間 地點
         match = re.findall(r"([一二三四五六日][0-9,ABCD]*)\(([^\(\)]*)\)",columns[12].text)
         # print(match)

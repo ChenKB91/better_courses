@@ -57,7 +57,7 @@ function showInfo(course) {
     btn.click(function(){addToNTUCourse(course)});
     $('#buttonDiv').append(btn);
 
-    var btn = $('<button id="ntu" type="button" class="w3-button w3-hover-white">更多課程資訊</button>')
+    var btn = $('<button id="ntu" type="button" class="w3-button w3-hover-white">更多課程資訊 (experimental)</button>')
     btn.click(function(){openNTUCourseInfo(course)});
     $('#buttonDiv').append(btn);
     //show box

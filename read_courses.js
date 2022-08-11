@@ -122,7 +122,7 @@ function addMatchCourses() {
     if (options.dpt === "all") {
         for (dpt in dataDpt) {
             dataDpt[dpt].forEach(function (course) {
-                course['dpt'] = options.dpt;
+                course['dpt'] = dpt;
                 if (filter(course, options)) addToList(course);
             })
         }

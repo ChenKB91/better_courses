@@ -295,7 +295,7 @@ function addToNTUCourse(course) {
 
 function openNTUCourseInfo(course) {
     window.open('https://nol.ntu.edu.tw/nol/coursesearch/print_table.php?course_id='+course.courseID2+'&class='+course.class+
-    '&dpt_code='+course.dpt+'&ser_no='+course.waterNum+'&semester=111-1&lang=CH')
+    '&dpt_code='+course.dpt+'&ser_no='+course.waterNum+'&semester=111-2&lang=CH')
 }
 
 function exportJSON() {

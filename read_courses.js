@@ -2,13 +2,15 @@ var dataGeneral, popup, popupInfo;
 var forbiddenSession = new Array(105).fill(0);
 var courseInTable = new Array(105).fill(0);
 var addedCourse = {};
+
 $(document).ready(function () {
     // Read json and initialize variable
     $.getJSON("data/general.json", function (json) { dataGeneral = json; })
     $.getJSON("data/department.json", function (json) { dataDpt = json; })
     $.getJSON("data/pe.json", function (json) { dataPe = json; })
     $.getJSON("data/common.json", function (json) { dataCommon = json; })
-
+    $.get("config.ini", function (data) {semester = data.split(' ').slice(-1)[0].replaceAll('\n', '');})
+ 
     popup = document.getElementById('infoPopup');
     popupInfo = document.getElementById('infoContent');
     document.getElementById('closeInfo').onclick = function () { popup.style.display = "none" }
@@ -35,6 +37,7 @@ function showHowto() {
 
     $('#infoContent').html(s);
     popup.style.display = 'block';
+    // console.log(semester)
 }
 function showInfo(course) {
     //change content
@@ -295,7 +298,7 @@ function addToNTUCourse(course) {
 
 function openNTUCourseInfo(course) {
     window.open('https://nol.ntu.edu.tw/nol/coursesearch/print_table.php?course_id='+course.courseID2+'&class='+course.class+
-    '&dpt_code='+course.dpt+'&ser_no='+course.waterNum+'&semester=111-2&lang=CH')
+    '&dpt_code='+course.dpt+'&ser_no='+course.waterNum+'&semester='+semester+'&lang=CH')
 }
 
 function exportJSON() {

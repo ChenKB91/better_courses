@@ -1,4 +1,6 @@
 # better_courses
+> [!WARNING]  
+> 由於台大終於正式推出了好用一點的選課系統，因此此repo不會再做更新。若有需要，請自行clone下來去跑script來抓新的課程。
 <img src="https://github.com/ChenKB91/better_courses/blob/main/cat.png" width=500>
 
 相信各位台大人都有過被課程網糟糕的搜尋系統搞到快瘋掉的經驗，例如篩選特定節次功能結果得到一堆不能上的課程、共同課程的「所有領域」不會搜尋全部領域等，我也是不堪其擾。為了解決這個問題，便趁暑假製作了這個小工具幫助尋找課程。
